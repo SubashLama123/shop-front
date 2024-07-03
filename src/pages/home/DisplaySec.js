@@ -2,7 +2,7 @@ import React from 'react'
 
 const DisplaySec = () => {
   return (
-    <div className='grid grid-cols-2 items-center'>
+    <div className='grid grid-cols-2 items-center sm:grid-cols-1 sm:mb-7'>
 
       <div className="dis-img">
 
@@ -12,7 +12,7 @@ const DisplaySec = () => {
       </div>
 
 
-      <div className="dis-info space-y-2">
+      <div className="dis-info space-y-2 sm:text-center sm:px-4">
 
         <h1 className='text-3xl font-bold'>Hi, I am John</h1>
         <p className='text-pink-900 italic'>Some Dev, Freelancer, Rounder</p>
