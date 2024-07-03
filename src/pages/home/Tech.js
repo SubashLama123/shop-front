@@ -3,10 +3,10 @@ import { DiAngularSimple, DiAppstore, DiCss3Full, DiHtml5, DiJava, DiJavascript,
 
 const Tech = () => {
   return (
-    <div className='space-y-5'>
+    <div className='space-y-12'>
       <h1 className='text-3xl font-semibold text-center'>Technologies I use</h1>
 
-      <div className="tech-icons grid grid-cols-4 justify-items-center gap-y-4">
+      <div className="tech-icons grid grid-cols-4 justify-items-center gap-y-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
         <DiHtml5 size={200} />
         <DiJava size={200} />
         <DiCss3Full size={200} />
