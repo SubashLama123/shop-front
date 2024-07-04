@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Page1 from './pages/nested-compo/Page1';
 import Page2 from './pages/nested-compo/Page2';
+import RootLayout from './components/RootLayout';
 
 const App = () => {
 
@@ -11,26 +12,23 @@ const App = () => {
 
     {
       path: '/',
-      element: <Home />,
+      element: <RootLayout />,
       children: [
         {
           index: true,
-          element: <Page1 />,
+          element: <Home />,
+
         },
 
         {
-          path: 'page2',
-          element: <Page2 />,
-
-        },
+          path: 'about-page',
+          element: <About />
+        }
 
       ]
 
     },
-    {
-      path: 'about-page',
-      element: <About />
-    }
+
 
 
   ]);
