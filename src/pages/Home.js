@@ -1,24 +1,14 @@
 import React from 'react'
-
+import LikesComments from '../components/LikesComments'
 
 const Home = () => {
-
-  const numbers = [22, 44, 55, 66, 77];
-
   return (
-    <div>
+    <div className='max-w-sm'>
 
-      {numbers.map((e, i) => {
+      <h1>Download as a King from all major filehosters with one premium account</h1>
+      <img src="https://sanet.pics/images/linkifier_purple.jpg" alt="" />
 
-        return <h1 key={i}>{`hello ${e} sjadsan sjd sdjf`}</h1>
-      })}
-
-      <h1>This is Home Page</h1>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi cupiditate blanditiis aut sit? Qui velit ea nulla dolorem saepe a laboriosam, odit dignissimos beatae neque aliquid iusto culpa deserunt esse.</p>
-      <p>-------------------------------------------------------------------------------</p>
-
-
-
+      <LikesComments like={2000} />
     </div>
   )
 }
