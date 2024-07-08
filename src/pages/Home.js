@@ -1,32 +1,41 @@
 import { faker } from '@faker-js/faker';
-import React, { useState } from 'react'
-import ProfileCard from '../components/ProfileCard';
-
-
+import { Button } from '@material-tailwind/react';
+import React, { useState } from 'react';
 const Home = () => {
-  const [count, setCount] = useState(0);
+
   const [users, setUsers] = useState([]);
 
 
 
-  const handleIncre = () => {
-    setCount((prev) => prev + 1);
-    console.log(faker.internet.email());
-    console.log(faker.internet.userName());
-    console.log(faker.image.avatarLegacy());
+  const handleAdd = () => {
+    const newObj = {
+      email: faker.internet.email(),
+      username: faker.internet.userName(),
+      image: faker.image.avatarLegacy()
+    };
+    setUsers((prev) => [...prev, newObj]);
+
   }
 
 
 
+
+
   return (
-    <div>
-      <ProfileCard />
+    <div className='p-4'>
 
+      <div className="adds flex justify-end">
+        <Button onClick={handleAdd} ripple={true} color='green'>Add User</Button>
+      </div>
 
-      <p>{count % 2 === 0 ? `even number ${count}` : `odd number ${count}`}</p>
-
-      <button onClick={handleIncre}>AddVal</button>
-
+      <div className="users">
+        {users.map((user, i) => {
+          return <div key={i}>
+            <img src={user.image} alt="" />
+            <h1>{user.username}</h1>
+          </div>
+        })}
+      </div>
 
 
 
