@@ -1,14 +1,35 @@
-import React from 'react'
-import LikesComments from '../components/LikesComments'
+import { faker } from '@faker-js/faker';
+import React, { useState } from 'react'
+import ProfileCard from '../components/ProfileCard';
+
 
 const Home = () => {
+  const [count, setCount] = useState(0);
+  const [users, setUsers] = useState([]);
+
+
+
+  const handleIncre = () => {
+    setCount((prev) => prev + 1);
+    console.log(faker.internet.email());
+    console.log(faker.internet.userName());
+    console.log(faker.image.avatarLegacy());
+  }
+
+
+
   return (
-    <div className='max-w-sm'>
+    <div>
+      <ProfileCard />
 
-      <h1>Download as a King from all major filehosters with one premium account</h1>
-      <img src="https://sanet.pics/images/linkifier_purple.jpg" alt="" />
 
-      <LikesComments like={2000} />
+      <p>{count % 2 === 0 ? `even number ${count}` : `odd number ${count}`}</p>
+
+      <button onClick={handleIncre}>AddVal</button>
+
+
+
+
     </div>
   )
 }
