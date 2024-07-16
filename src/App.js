@@ -5,6 +5,7 @@ import About from './pages/About';
 import RootLayout from './components/RootLayout';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
+import CategoryItems from './pages/CategoryItems';
 
 const App = () => {
 
@@ -17,6 +18,11 @@ const App = () => {
         {
           index: true,
           element: <Home />,
+
+        },
+        {
+          path: 'category/:cata',
+          element: <CategoryItems />,
 
         },
 

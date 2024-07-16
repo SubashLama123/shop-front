@@ -9,14 +9,14 @@ import {
 } from "@material-tailwind/react";
 
 
-const ProfileCard = ({ email, username, image }) => {
-  console.log(email);
-  console.log(username);
-  console.log(image);
+const ProfileCard = ({ user: { email, username, image } }) => {
+
+
 
   return (
+
     <Card className="w-96 ">
-      <CardHeader floated={false} className="h-80">
+      <CardHeader floated={false} className="">
         <img src={image} alt="profile-picture" />
       </CardHeader>
       <CardBody className="text-center">
