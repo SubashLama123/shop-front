@@ -7,14 +7,19 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
+import { faker } from '@faker-js/faker';
+import { useNavigate } from 'react-router';
 
 
-const EcommerceCard = () => {
+const EcommerceCard = ({ meal: { strMeal, idMeal, strMealThumb } }) => {
+
+  const nav = useNavigate();
+
   return (
     <Card className="">
       <CardHeader shadow={false} floated={false} className="h-96">
         <img
-          src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80"
+          src={strMealThumb}
           alt="card-image"
           className="h-full w-full object-cover"
         />
@@ -22,10 +27,10 @@ const EcommerceCard = () => {
       <CardBody>
         <div className="mb-2 flex items-center justify-between">
           <Typography color="blue-gray" className="font-medium">
-            Apple AirPods
+            {strMeal}
           </Typography>
           <Typography color="blue-gray" className="font-medium">
-            $95.00
+            {`$${faker.commerce.price()}`}
           </Typography>
         </div>
         <Typography
@@ -39,11 +44,12 @@ const EcommerceCard = () => {
       </CardBody>
       <CardFooter className="pt-0">
         <Button
+          onClick={() => nav(`/food-detail/${idMeal}`)}
           ripple={false}
           fullWidth={true}
           className="bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
         >
-          Add to Cart
+          View Full
         </Button>
       </CardFooter>
     </Card>

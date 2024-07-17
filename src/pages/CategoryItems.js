@@ -50,8 +50,8 @@ const CategoryItems = () => {
   return (
     <div className='p-3 grid grid-cols-3 gap-4'>
 
-      {data?.meals.map((cata, i) => {
-        return <EcommerceCard key={i} />
+      {data?.meals.map((meal, i) => {
+        return <EcommerceCard meal={meal} key={i} />
       })}
 
 

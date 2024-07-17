@@ -6,6 +6,7 @@ import RootLayout from './components/RootLayout';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 import CategoryItems from './pages/CategoryItems';
+import FoodDetail from './pages/FoodDetail';
 
 const App = () => {
 
@@ -23,6 +24,12 @@ const App = () => {
         {
           path: 'category/:cata',
           element: <CategoryItems />,
+
+        },
+
+        {
+          path: 'food-detail/:id',
+          element: <FoodDetail />,
 
         },
 
