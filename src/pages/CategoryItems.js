@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
+import EcommerceCard from '../components/EcommerceCard';
 
 const CategoryItems = () => {
   const { cata } = useParams();
@@ -45,9 +46,17 @@ const CategoryItems = () => {
   }
 
 
-  console.log(data);
+
   return (
-    <div>
+    <div className='p-3 grid grid-cols-3 gap-4'>
+
+      {data?.meals.map((cata, i) => {
+        return <EcommerceCard key={i} />
+      })}
+
+
+
+
 
     </div>
   )
