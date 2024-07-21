@@ -1,40 +1,63 @@
+import { Button, Input, avatar } from '@material-tailwind/react';
+import axios from 'axios';
+import { useFormik } from 'formik'
 import React from 'react'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import Home from './pages/Home';
-import RootLayout from './components/RootLayout';
-import NotFound from './pages/NotFound';
-
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const App = () => {
 
-  const router = createBrowserRouter([
+  const [search, setSearch] = useState('spider');
+  const [data, setData] = useState();
 
-    {
-      path: '/',
-      element: <RootLayout />,
-      children: [
-        {
-          index: true,
-          element: <Home />,
-
-        },
-
-        {
-          path: '*',
-          element: <NotFound />
-        }
-
-
-
-      ]
-
+  const formik = useFormik({
+    initialValues: {
+      search: ''
     },
+    onSubmit: (val) => {
+
+      setSearch(val.search);
+
+    }
+  });
+
+  const getData = async () => {
+    try {
+
+      const response = await axios.get(`http://www.omdbapi.com?apikey=6905a701&s=${search}`);
+      setData(response.data.Search);
+    } catch (err) {
+
+    }
+  }
+
+  useEffect(() => {
+    getData();
+
+  }, [search])
+
+  console.log(data);
 
 
+  return (
+    <div className='p-5'>
+      <div className="search-info" >
+        <form onSubmit={formik.handleSubmit} className='space-y-4'>
+          <div>
+            <Input
+              name='search'
+              value={formik.values.search}
+              onChange={formik.handleChange}
+              label='search movie' />
+          </div>
 
-  ]);
+          <Button type='submit' size='sm'>Submit</Button>
+        </form>
+      </div>
 
-  return <RouterProvider router={router} />
+
+    </div>
+  )
 }
 
 export default App
