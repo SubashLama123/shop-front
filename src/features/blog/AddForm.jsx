@@ -65,7 +65,7 @@ const AddForm = () => {
       nav(-1);
 
     },
-    //validationSchema: blogSchema
+    // validationSchema: blogSchema
   });
 
   return (
