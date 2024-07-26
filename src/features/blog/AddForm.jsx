@@ -14,6 +14,9 @@ import {
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { nanoid } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
+import { addToBlog } from './blogSlice';
+import { useNavigate } from 'react-router';
 
 //import * as Nei from '../../Sample';
 
@@ -33,6 +36,10 @@ const checkBoxData = [
 
 
 const AddForm = () => {
+
+  const dispatch = useDispatch();
+
+  const nav = useNavigate();
 
   const blogSchema = Yup.object({
     title: Yup.string().min(5).max(100).required(),
@@ -54,9 +61,11 @@ const AddForm = () => {
       description: ''
     },
     onSubmit: (val, { resetForm }) => {
-      console.log({ ...val, id: nanoid() });
+      dispatch(addToBlog({ ...val, id: nanoid() }));
+      nav(-1);
+
     },
-    validationSchema: blogSchema
+    //validationSchema: blogSchema
   });
 
   return (
