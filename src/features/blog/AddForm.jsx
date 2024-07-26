@@ -13,6 +13,7 @@ import {
 } from "@material-tailwind/react";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { nanoid } from '@reduxjs/toolkit';
 
 //import * as Nei from '../../Sample';
 
@@ -49,17 +50,17 @@ const AddForm = () => {
       blogType: '',
       someEx: [],
       country: '',
-      rating: 0,
+      rating: null,
       description: ''
     },
     onSubmit: (val, { resetForm }) => {
-      console.log(val);
+      console.log({ ...val, id: nanoid() });
     },
     validationSchema: blogSchema
   });
 
   return (
-    <div className='p-7  max-w-lg'>
+    <div className='px-7 pt-3  max-w-lg'>
       <Card color="transparent" shadow={false}>
         <Typography variant="h4" color="blue-gray">
           Add Blog
@@ -68,7 +69,7 @@ const AddForm = () => {
           Enter Blog details
         </Typography>
 
-        <form onSubmit={handleSubmit} className="mt-7 mb-2 ">
+        <form onSubmit={handleSubmit} className="mt-4 mb-2 ">
           <div className="mb-1 flex flex-col gap-6">
 
             <div>
@@ -90,7 +91,7 @@ const AddForm = () => {
                 value={values.author}
                 label='Author'
               />
-              {/* <h1 className='text-red-600'>{errors.author}</h1> */}
+              {errors.author && touched.author && <h1 className='text-red-600'>{errors.author}</h1>}
             </div>
 
 
@@ -114,6 +115,7 @@ const AddForm = () => {
 
 
               </div>
+              {errors.blogType && touched.blogType && <h1 className='text-red-600'>{errors.blogType}</h1>}
             </div>
 
             <div className="ch">
@@ -130,6 +132,7 @@ const AddForm = () => {
                 })}
 
               </div>
+              {errors.someEx && touched.someEx && <h1 className='text-red-600'>{errors.someEx}</h1>}
             </div>
 
 
@@ -140,11 +143,13 @@ const AddForm = () => {
                 <Option value='china'>China</Option>
 
               </Select>
+              {errors.country && touched.country && <h1 className='text-red-600'>{errors.country}</h1>}
             </div>
 
             <div>
               <Typography>Rating</Typography>
               <Rating onChange={(e) => setFieldValue('rating', e)} />
+              {errors.rating && touched.rating && <h1 className='text-red-600'>{errors.rating}</h1>}
             </div>
 
             <div>
@@ -153,6 +158,7 @@ const AddForm = () => {
                 value={values.description}
                 onChange={handleChange}
                 label="Description" />
+              {errors.description && touched.description && <h1 className='text-red-600'>{errors.description}</h1>}
             </div>
 
             {/* <div>

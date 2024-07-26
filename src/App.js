@@ -6,6 +6,14 @@ import AddForm from './features/blog/AddForm';
 
 const App = () => {
 
+  // const per = [11, 22, 44, 55];
+  // console.log([...per, 99]);
+  // const p = {
+  //   name: 'ram'
+  // };
+
+  // console.log({ ...p, age: 90 });
+
   const router = createBrowserRouter([
     {
       path: '/',
