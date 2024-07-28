@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import RootLayout from './ui/RootLayout';
 import Blogs from './features/blog/Blogs';
 import AddForm from './features/blog/AddForm';
+import EditForm from './features/blog/EditForm';
 
 const App = () => {
 
@@ -30,6 +31,10 @@ const App = () => {
         {
           path: 'add-blog',
           element: <AddForm />
+        },
+        {
+          path: 'edit-blog/:id',
+          element: <EditForm />
         }
       ]
     }

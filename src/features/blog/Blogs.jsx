@@ -2,12 +2,14 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Card, IconButton, Rating, Typography } from "@material-tailwind/react";
 import AlertDialog from '../../ui/AlertDialog';
+import { useNavigate } from 'react-router';
 
 const TABLE_HEAD = ["Title", "Description", "Rating", "Author",
   "BlogType", "Country", "Update", "Delete"];
 
 
 const Blogs = () => {
+  const nav = useNavigate();
 
   const [open, setOpen] = React.useState(false);
   const [ind, setInd] = React.useState(0);
@@ -103,7 +105,7 @@ const Blogs = () => {
                       color="blue-gray"
                       className="font-medium"
                     >
-                      <IconButton size='sm' color='green'>
+                      <IconButton onClick={() => nav(`/edit-blog/${id}`)} size='sm' color='green'>
                         <i className="fas fa-edit" />
                       </IconButton>
                     </Typography>
