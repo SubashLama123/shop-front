@@ -6,6 +6,10 @@ import AddForm from './features/blog/AddForm';
 
 const App = () => {
 
+  // const g = [11, 22, 44, 55, 77];
+  // g.splice(1, 1);
+  // console.log(g);
+
   // const per = [11, 22, 44, 55];
   // console.log([...per, 99]);
   // const p = {
