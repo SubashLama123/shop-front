@@ -1,43 +1,21 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Card, Typography } from "@material-tailwind/react";
+import { Card, IconButton, Rating, Typography } from "@material-tailwind/react";
+import AlertDialog from '../../ui/AlertDialog';
 
-const TABLE_HEAD = ["Name", "Job", "Employed", "Update User"];
-const TABLE_ROWS = [
-  {
-    name: "John Michael",
-    job: "Manager",
-    date: "23/04/18",
-  },
-  {
-    name: "Alexa Liras",
-    job: "Developer",
-    date: "23/04/18",
-  },
-  {
-    name: "Laurent Perrier",
-    job: "Executive",
-    date: "19/09/17",
-  },
-  {
-    name: "Michael Levi",
-    job: "Developer",
-    date: "24/12/08",
-  },
-  {
-    name: "Richard Gran",
-    job: "Manager",
-    date: "04/10/21",
-  },
-];
+const TABLE_HEAD = ["Title", "Description", "Rating", "Author",
+  "BlogType", "Country", "Update", "Delete"];
+
 
 const Blogs = () => {
 
-
+  const [open, setOpen] = React.useState(false);
+  const [ind, setInd] = React.useState(0);
+  const handleOpen = () => setOpen(!open);
 
   const { blogs } = useSelector((state) => state.blogSlice);
 
-  console.log(blogs);
+
   return (
     <div className='p-7'>
       <Card className="h-full w-full overflow-scroll">
@@ -61,19 +39,19 @@ const Blogs = () => {
             </tr>
           </thead>
           <tbody>
-            {TABLE_ROWS.map(({ name, job, date }, index) => {
-              const isLast = index === TABLE_ROWS.length - 1;
+            {blogs.map(({ title, author, blogType, someEx, description, rating, country, id }, index) => {
+              const isLast = index === blogs.length - 1;
               const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
               return (
-                <tr key={name}>
+                <tr key={id}>
                   <td className={classes}>
                     <Typography
                       variant="small"
                       color="blue-gray"
                       className="font-normal"
                     >
-                      {name}
+                      {title}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -82,7 +60,20 @@ const Blogs = () => {
                       color="blue-gray"
                       className="font-normal"
                     >
-                      {job}
+                      {description}
+                    </Typography>
+                  </td>
+
+                  <td className={classes}>
+                    <Rating value={rating} />
+                  </td>
+                  <td className={classes}>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal"
+                    >
+                      {author}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -91,18 +82,44 @@ const Blogs = () => {
                       color="blue-gray"
                       className="font-normal"
                     >
-                      {date}
+                      {blogType}
                     </Typography>
                   </td>
+
                   <td className={classes}>
                     <Typography
-                      as="a"
-                      href="#"
+
                       variant="small"
                       color="blue-gray"
                       className="font-medium"
                     >
-                      Edit
+                      {country}
+                    </Typography>
+                  </td>
+                  <td className={classes}>
+                    <Typography
+
+                      variant="small"
+                      color="blue-gray"
+                      className="font-medium"
+                    >
+                      <IconButton size='sm' color='green'>
+                        <i className="fas fa-edit" />
+                      </IconButton>
+                    </Typography>
+                  </td>
+                  <td className={classes}>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-medium"
+                    >
+                      <IconButton onClick={() => {
+                        setInd((prev) => index);
+                        handleOpen();
+                      }} size='sm' color='pink'>
+                        <i className="fas fa-trash" />
+                      </IconButton>
                     </Typography>
                   </td>
                 </tr>
@@ -111,6 +128,7 @@ const Blogs = () => {
           </tbody>
         </table>
       </Card>
+      <AlertDialog open={open} handleOpen={handleOpen} index={ind} />
     </div>
   )
 }

@@ -9,9 +9,12 @@ export const blogSlice = createSlice({
   reducers: {
     addToBlog: (state, action) => {
       state.blogs.push(action.payload);
-    }
+    },
+    removeBlog: (state, action) => {
+      state.blogs.splice(action.payload, 1);
+    },
   }
 });
 
 
-export const { addToBlog } = blogSlice.actions;
+export const { addToBlog, removeBlog } = blogSlice.actions;
