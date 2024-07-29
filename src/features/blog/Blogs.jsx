@@ -20,8 +20,8 @@ const Blogs = () => {
 
   return (
     <div className='p-7'>
-      <Card className="h-full w-full overflow-scroll">
-        <table className="w-full min-w-max table-auto text-left">
+      <Card className="h-full w-full ">
+        <table className="w-full  table-fixed text-left">
           <thead>
             <tr>
               {TABLE_HEAD.map((head) => (
@@ -43,7 +43,7 @@ const Blogs = () => {
           <tbody>
             {blogs.map(({ title, author, blogType, someEx, description, rating, country, id }, index) => {
               const isLast = index === blogs.length - 1;
-              const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+              const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50 ";
 
               return (
                 <tr key={id}>
@@ -56,7 +56,7 @@ const Blogs = () => {
                       {title}
                     </Typography>
                   </td>
-                  <td className={classes}>
+                  <td className=''>
                     <Typography
                       variant="small"
                       color="blue-gray"
@@ -67,7 +67,7 @@ const Blogs = () => {
                   </td>
 
                   <td className={classes}>
-                    <Rating value={rating} />
+                    <Rating readonly value={rating} />
                   </td>
                   <td className={classes}>
                     <Typography

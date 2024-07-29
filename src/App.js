@@ -7,6 +7,33 @@ import EditForm from './features/blog/EditForm';
 
 const App = () => {
 
+  // const pers = ['ram', 'shyam'];
+  // console.log(pers.includes('shyam'));
+  // const persons = [
+  //   { id: 1, name: 'john' },
+  //   { id: 2, name: 'riya' },
+  //   { id: 3, name: 'shawn' },
+  // ];
+
+  // const m = persons.map((g) => {
+  //   return g.id === 1 ? { id: 1, name: 'siya' } : g;
+  // });
+
+  // console.log(m);
+
+  // persons.push({ id: 4, name: 'lita' });
+  // console.log(persons);
+
+  // persons.splice(1, 1);
+
+  // console.log(persons);
+
+  // const users = [
+  //   { id: 1, name: 'john', genre: 'male' },
+  //   { id: 2, name: 'riya', genre: 'male' },
+  //   { id: 3, name: 'shawn', genre: 'female' },
+  // ];
+
   // const g = [11, 22, 44, 55, 77];
   // g.splice(1, 1);
   // console.log(g);

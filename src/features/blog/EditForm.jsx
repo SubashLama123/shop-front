@@ -15,8 +15,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { nanoid } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToBlog } from './blogSlice';
 import { useNavigate, useParams } from 'react-router';
+import { updateBlog } from './blogSlice';
 
 //import * as Nei from '../../Sample';
 
@@ -40,6 +40,8 @@ const EditForm = () => {
   const dispatch = useDispatch();
   const { blogs } = useSelector((state) => state.blogSlice);
 
+  const blog = blogs.find((blog) => blog.id === id);
+
 
 
   const nav = useNavigate();
@@ -55,21 +57,23 @@ const EditForm = () => {
   });
   const { handleChange, handleSubmit, values, errors, setFieldValue, touched } = useFormik({
     initialValues: {
-      title: '',
-      author: '',
+      title: blog.title,
+      author: blog.author,
       blogType: '',
-      someEx: [],
-      country: '',
-      rating: null,
-      description: ''
+      someEx: '',
+      country: blog.country,
+      rating: blog.rating,
+      description: blog.description
     },
     onSubmit: (val, { resetForm }) => {
-      dispatch(addToBlog({ ...val, id: nanoid() }));
+      dispatch(updateBlog({ ...val, id: id }));
       nav(-1);
 
     },
-    // validationSchema: blogSchema
+    validationSchema: blogSchema
   });
+
+
 
   return (
     <div className='px-7 pt-3  max-w-lg'>
@@ -120,6 +124,7 @@ const EditForm = () => {
                     color={rad.color}
                     name='blogType'
                     onChange={handleChange}
+                    checked={rad.value === blog.blogType}
                     value={rad.value}
                     label={rad.label}
                   />;
@@ -136,6 +141,7 @@ const EditForm = () => {
                 {checkBoxData.map((check, i) => {
                   return <Checkbox
                     key={i}
+                    checked={blog.someEx.includes(check.value)}
                     name='someEx'
                     onChange={handleChange}
                     color={check.color}
@@ -149,7 +155,7 @@ const EditForm = () => {
 
 
             <div className="w-72">
-              <Select onChange={(e) => setFieldValue('country', e)} label="Select Country">
+              <Select onChange={(e) => setFieldValue('country', e)} label="Select Country" value={values.country}>
                 <Option value='nepal'>Nepal</Option>
                 <Option value='india'>India</Option>
                 <Option value='china'>China</Option>
@@ -160,7 +166,7 @@ const EditForm = () => {
 
             <div>
               <Typography>Rating</Typography>
-              <Rating onChange={(e) => setFieldValue('rating', e)} />
+              <Rating value={values.rating} onChange={(e) => setFieldValue('rating', e)} />
               {errors.rating && touched.rating && <h1 className='text-red-600'>{errors.rating}</h1>}
             </div>
 
