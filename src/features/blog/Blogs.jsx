@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Card, IconButton, Rating, Typography } from "@material-tailwind/react";
 import AlertDialog from '../../ui/AlertDialog';
 import { useNavigate } from 'react-router';
 
-const TABLE_HEAD = ["Title", "Description", "Rating", "Author",
+const TABLE_HEAD = ["Title", 'Image', "Description", "Rating", "Author",
   "BlogType", "Country", "Update", "Delete"];
 
 
@@ -17,8 +17,21 @@ const Blogs = () => {
 
   const { blogs } = useSelector((state) => state.blogSlice);
 
+  // useEffect(() => {
+  //   window.addEventListener('keypress', (e) => {
+  //     console.log(`hello jee ${e.code}`);
 
+  //   });
+  // }, []);
+
+
+
+  // console.log('render');
   return (
+    // <>
+    //   <button onClick={() => setOpen((prev) => !prev)}>ToogleOpen</button>
+
+    // </>
     <div className='p-7'>
       <Card className="h-full w-full ">
         <table className="w-full  table-fixed text-left">
@@ -41,7 +54,7 @@ const Blogs = () => {
             </tr>
           </thead>
           <tbody>
-            {blogs.map(({ title, author, blogType, someEx, description, rating, country, id }, index) => {
+            {blogs.map(({ title, author, blogType, someEx, description, rating, country, image, id }, index) => {
               const isLast = index === blogs.length - 1;
               const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50 ";
 
@@ -55,6 +68,12 @@ const Blogs = () => {
                     >
                       {title}
                     </Typography>
+                  </td>
+
+                  <td className=''>
+
+                    <img src={image} alt="img" />
+
                   </td>
                   <td className=''>
                     <Typography

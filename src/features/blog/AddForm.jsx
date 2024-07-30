@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Card,
   Input,
@@ -37,9 +37,11 @@ const checkBoxData = [
 
 const AddForm = () => {
 
+
   const dispatch = useDispatch();
 
   const nav = useNavigate();
+
 
   const blogSchema = Yup.object({
     title: Yup.string().min(5).max(100).required(),
@@ -58,14 +60,15 @@ const AddForm = () => {
       someEx: [],
       country: '',
       rating: null,
-      description: ''
+      description: '',
+      image: null
     },
     onSubmit: (val, { resetForm }) => {
       dispatch(addToBlog({ ...val, id: nanoid() }));
       nav(-1);
 
     },
-    validationSchema: blogSchema
+    //validationSchema: blogSchema
   });
 
   return (
@@ -161,6 +164,26 @@ const AddForm = () => {
               {errors.rating && touched.rating && <h1 className='text-red-600'>{errors.rating}</h1>}
             </div>
 
+
+
+            <div>
+              <Input onChange={(e) => {
+                const file = e.target.files[0];
+                // const url = URL.createObjectURL(file);
+                // setFieldValue('image', url);
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+
+                reader.addEventListener('load', (e) => {
+                  setFieldValue('image', e.target.result);
+                  // const random = Math.floor(Math.random() * 100 + 1);
+                  // console.log(`hello ${random}`);
+                });
+              }} type='file' label='select image' />
+
+              {values.image && <img src={values.image} alt="" className='h-[220px] w-full] mt-5 object-cover' />}
+            </div>
+
             <div>
               <Textarea
                 name='description'
@@ -170,9 +193,7 @@ const AddForm = () => {
               {errors.description && touched.description && <h1 className='text-red-600'>{errors.description}</h1>}
             </div>
 
-            {/* <div>
-              <Input type='file' label='select image' />
-            </div> */}
+
 
 
 

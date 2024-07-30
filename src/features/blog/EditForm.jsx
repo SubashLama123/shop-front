@@ -165,6 +165,10 @@ const EditForm = () => {
             </div>
 
             <div>
+              <Input type='file' label='select image' />
+            </div>
+
+            <div>
               <Typography>Rating</Typography>
               <Rating value={values.rating} onChange={(e) => setFieldValue('rating', e)} />
               {errors.rating && touched.rating && <h1 className='text-red-600'>{errors.rating}</h1>}
@@ -179,9 +183,7 @@ const EditForm = () => {
               {errors.description && touched.description && <h1 className='text-red-600'>{errors.description}</h1>}
             </div>
 
-            {/* <div>
-              <Input type='file' label='select image' />
-            </div> */}
+
 
 
 
