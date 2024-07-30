@@ -59,8 +59,8 @@ const EditForm = () => {
     initialValues: {
       title: blog.title,
       author: blog.author,
-      blogType: '',
-      someEx: '',
+      blogType: blog.blogType,
+      someEx: blog.someEx,
       country: blog.country,
       rating: blog.rating,
       description: blog.description
@@ -124,7 +124,7 @@ const EditForm = () => {
                     color={rad.color}
                     name='blogType'
                     onChange={handleChange}
-                    checked={rad.value === blog.blogType}
+                    checked={rad.value === values.blogType}
                     value={rad.value}
                     label={rad.label}
                   />;
@@ -141,7 +141,7 @@ const EditForm = () => {
                 {checkBoxData.map((check, i) => {
                   return <Checkbox
                     key={i}
-                    checked={blog.someEx.includes(check.value)}
+                    checked={values.someEx.includes(check.value)}
                     name='someEx'
                     onChange={handleChange}
                     color={check.color}
