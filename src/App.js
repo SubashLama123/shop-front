@@ -6,6 +6,15 @@ import AddForm from './features/blog/AddForm';
 import EditForm from './features/blog/EditForm';
 
 const App = () => {
+  // const person = {
+  //   name: 'hari',
+  //   age: 90
+  // };
+
+  // delete person.name;
+
+  // console.log(person);
+
 
   // const pers = ['ram', 'shyam'];
   // console.log(pers.includes('shyam'));
