@@ -44,13 +44,13 @@ const AddForm = () => {
 
 
   const blogSchema = Yup.object({
-    // title: Yup.string().min(5).max(100).required(),
-    // author: Yup.string().required(),
-    // blogType: Yup.string().required(),
-    // someEx: Yup.array().min(1).required(),
-    // country: Yup.string().required(),
-    // rating: Yup.number().required(),
-    // description: Yup.string().min(10).max(200).required(),
+    title: Yup.string().min(5).max(100).required(),
+    author: Yup.string().required(),
+    blogType: Yup.string().required(),
+    someEx: Yup.array().min(1).required(),
+    country: Yup.string().required(),
+    rating: Yup.number().required(),
+    description: Yup.string().min(10).max(200).required(),
     image: Yup.mixed().test('fileType', 'invalid image', (e) => {
       const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
       return e && validTypes.includes(e.type);
@@ -76,7 +76,7 @@ const AddForm = () => {
       nav(-1);
 
     },
-    //validationSchema: blogSchema
+    validationSchema: blogSchema
   });
 
   return (
