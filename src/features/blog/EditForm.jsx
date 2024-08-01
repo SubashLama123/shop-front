@@ -32,6 +32,7 @@ const checkBoxData = [
   { color: 'green', value: 'green', label: 'Green' },
 ];
 
+const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 
 
 
@@ -43,7 +44,7 @@ const EditForm = () => {
   const blog = blogs.find((blog) => blog.id === id);
 
 
-  console.log(blog.baseImage);
+
   const nav = useNavigate();
 
   const blogSchema = Yup.object({
@@ -55,7 +56,7 @@ const EditForm = () => {
     rating: Yup.number().required(),
     description: Yup.string().min(10).max(200).required(),
     // image: Yup.mixed().test('fileType', 'invalid image', (e) => {
-    //   const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+
     //   return e && validTypes.includes(e.type);
 
     // })
@@ -74,17 +75,36 @@ const EditForm = () => {
     },
     onSubmit: (val, { resetForm }) => {
 
-      delete val.image;
-      dispatch(updateBlog({ ...val, id: id }));
-      nav(-1);
+
+      if (val.image === null) {
+        delete val.image;
+        dispatch(updateBlog({ ...val, id: id }));
+        nav(-1);
+      } else {
+        if (validTypes.includes(val.image.type)) {
+          delete val.image;
+          dispatch(updateBlog({ ...val, id: id }));
+          nav(-1);
+        } else {
+          console.log('please provide image');
+        }
+
+
+
+
+
+      }
+
+      // delete val.image;
+      // dispatch(updateBlog({ ...val, id: id }));
+      // nav(-1);
 
     },
     validationSchema: blogSchema,
 
+
   });
 
-  // console.log(values.baseImage);
-  // console.log(errors.image);
 
   return (
     <div className='px-7 pt-3  max-w-lg'>
