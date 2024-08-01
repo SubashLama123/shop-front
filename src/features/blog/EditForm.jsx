@@ -32,7 +32,7 @@ const checkBoxData = [
   { color: 'green', value: 'green', label: 'Green' },
 ];
 
-const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+export const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 
 
 
