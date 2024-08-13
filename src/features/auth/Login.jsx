@@ -8,6 +8,9 @@ import { useNavigate } from "react-router";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useLoginUserMutation } from "./userApi";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { addUser } from "./userSlice";
 
 const loginSchema = Yup.object({
   email: Yup.string().email().required(),
@@ -16,8 +19,9 @@ const loginSchema = Yup.object({
 
 const Login = () => {
   const [loginUser, { isLoading }] = useLoginUserMutation();
-
+  const dispatch = useDispatch();
   const nav = useNavigate();
+
   const { values, errors, handleSubmit, handleChange, touched } = useFormik({
     initialValues: {
       email: '',
@@ -26,9 +30,10 @@ const Login = () => {
     onSubmit: async (val) => {
       try {
         const response = await loginUser(val).unwrap();
-        console.log(response);
+        dispatch(addUser(response));
+        toast.success('successfully Logged In');
       } catch (err) {
-        console.log(err);
+        toast.error(err.data?.message);
       }
     },
     validationSchema: loginSchema
@@ -44,24 +49,17 @@ const Login = () => {
         <form className="mt-5 mb-2 " onSubmit={handleSubmit}>
           <div className="mb-1 flex flex-col gap-6">
 
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              Your Email
-            </Typography>
             <Input
               name="email"
               onChange={handleChange}
               size="lg"
               value={values.email}
+              label="Email"
               placeholder="name@mail.com"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
+
             />
             {errors.email && touched.email && <h1 className='text-red-600'>{errors.email}</h1>}
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              Password
-            </Typography>
+
             <Input
               type="password"
               size="lg"
@@ -69,10 +67,7 @@ const Login = () => {
               onChange={handleChange}
               value={values.password}
               placeholder="********"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
+              label="Password"
             />
 
             {errors.password && touched.password && <h1 className='text-red-600'>{errors.password}</h1>}
