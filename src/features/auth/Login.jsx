@@ -5,16 +5,18 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { useNavigate } from "react-router";
-import { Formik, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useLoginUserMutation } from "./userApi";
 
+const loginSchema = Yup.object({
+  email: Yup.string().email().required(),
+  password: Yup.string().required(),
+});
+
 const Login = () => {
   const [loginUser, { isLoading }] = useLoginUserMutation();
-  const loginSchema = Yup.object({
-    email: Yup.string().email().required(),
-    password: Yup.string().required(),
-  });
+
   const nav = useNavigate();
   const { values, errors, handleSubmit, handleChange, touched } = useFormik({
     initialValues: {
@@ -26,7 +28,7 @@ const Login = () => {
         const response = await loginUser(val).unwrap();
         console.log(response);
       } catch (err) {
-
+        console.log(err);
       }
     },
     validationSchema: loginSchema
@@ -76,7 +78,7 @@ const Login = () => {
             {errors.password && touched.password && <h1 className='text-red-600'>{errors.password}</h1>}
           </div>
 
-          <Button type="submit" className="mt-6" fullWidth>
+          <Button loading={isLoading} type="submit" className="mt-6" fullWidth>
             Login
           </Button>
           <Typography color="gray" className="mt-4 text-center font-normal">
